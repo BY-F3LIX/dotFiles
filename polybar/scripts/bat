@@ -1,0 +1,207 @@
+#!/bin/bash
+
+path_ac="/sys/class/power_supply/AC"
+path_battery_0="/sys/class/power_supply/BAT0"
+path_battery_1="/sys/class/power_supply/BAT1"
+
+hour="h"
+watt="W"
+discharge=0
+charge=0
+battery_max=0
+battery_now=0
+acOnline=$(cat $path_ac/online)
+if [ -f "$path_battery_0/power_now" ]; then
+    discharge=$(cat "$path_battery_0/power_now")
+    charge=$(cat "$path_battery_0/energy_now")
+    per_0=$(python -c "print ($(cat "$path_battery_0/energy_now")*100) / $(cat "$path_battery_0/energy_full")")
+    battery_max=$(cat "$path_battery_0/energy_full")
+    battery_now=$(cat "$path_battery_0/energy_now")
+fi
+if [ -f "$path_battery_1/power_now" ]; then
+    discharge=$(($discharge + $(cat "$path_battery_1/power_now")))
+    charge=$(($charge + $(cat "$path_battery_1/energy_now")))
+    per_1=$(python -c "print ($(cat "$path_battery_1/energy_now")*100) / $(cat "$path_battery_1/energy_full")")
+    battery_max=$(($battery_max + $(cat "$path_battery_1/energy_full")))
+    battery_now=$(($battery_now + $(cat "$path_battery_1/energy_now")))
+fi
+dischargeRate=$(python -c "print $discharge / 1000000.0")
+
+v=$dischargeRate
+
+dischargeRate=${v%%.*}
+
+#print powerconsumption in file
+#if [ $acOnline -eq 0 ]; then
+#    tag=$( tail -n 1 ~/.config/polybar/scripts/batstat )
+#    if [ $v != $tag ]; then
+#	echo "$v" >> ~/.config/polybar/scripts/batstat
+#    fi
+#fi
+
+
+#charge=$(($(cat "$path_battery_1/energy_now") + $(cat "$path_battery_0/energy_now")))
+
+battery_percent=$(($battery_now * 100))
+battery_percent=$(("$battery_percent / $battery_max"))
+
+
+if [ -f ~/.config/polybar/scripts/stat ]; then
+    mode=$(cat ~/.config/polybar/scripts/stat)
+    mode=$(python -c "print $mode % 2")
+    
+else
+    mode=1
+fi
+#chargetime
+chargeX=$(python -c "print $battery_max - $battery_now")
+if [ $chargeX -eq 0 ]; then
+	chargeH=0
+else 
+    if [ ! $discharge -eq 0 ]; then
+	chargeH=$(python -c "print $chargeX/$discharge")
+    fi
+fi
+if [ $discharge -eq 0 ]; then
+chargeM=0
+else
+chargeM=$(python -c "print (($chargeX.0/$discharge.0)-$chargeH)")
+fi
+v=$(python -c "print $chargeM * 60")
+chargeM=${v%%.*}
+ChargeTimeEstimated="$chargeH:$chargeM"
+
+
+
+#discharge time
+if [ $discharge -eq 0 ]; then
+    timeH=0
+    timeM=0
+else
+    timeH=$(python -c "print $charge/$discharge")
+    timeM=$(python -c "print (($charge.0/$discharge.0)-$timeH)")
+fi
+v=$(python -c "print $timeM * 60")
+timeM=${v%%.*}
+#puts 0 berfore single digit minutes.
+if [ $timeM -lt 10 ]; then
+    TimeEstimated="$timeH:0$timeM"
+else 
+    TimeEstimated="$timeH:$timeM"
+fi
+
+#if [ $acOnline -eq 0 ]; then
+#    timestat="$timeH.$timeM"
+#    tag=$( tail -n 1 ~/.config/polybar/scripts/timestat )
+#    if [ $timestat != $tag ]; then
+#	echo "$timestat" >> ~/.config/polybar/scripts/timestat
+#    fi
+#fi
+
+if [ $mode -eq 0 ]; then
+    if [ $acOnline -eq 1 ]; then
+	icon=""
+	if [ "$battery_percent" -gt 97 ]; then
+	    echo ""
+	fi
+	if [ "$battery_percent" -gt 95 ]; then
+	    echo "$icon"
+	else
+	    echo "$icon $battery_percent%"
+	fi
+    else
+	if [ "$battery_percent" -gt 85 ]; then
+	    icon=""
+	elif [ "$battery_percent" -gt 60 ]; then
+	    icon=""
+	elif [ "$battery_percent" -gt 40 ]; then
+	    icon=""
+	elif [ "$battery_percent" -gt 7 ]; then
+	    icon=""
+	elif [ "$battery_percent" -gt 4 ]; then
+	    icon=""
+	else
+	    icon=""
+	    notify-send --urgency=critical -t 200 -i /usr/share/icons/ubuntu-mono-light/status/16/gpm-primary-000.svg "Battery low! $battery_percent%"
+	fi
+
+	echo "$icon $battery_percent%"
+    fi
+else
+    if [ $acOnline -eq 1 ]; then
+	icon=""
+	string=""
+	if [ -f "$path_battery_0/status" ]; then
+	    if [ $(cat "$path_battery_0/status") = "Charging" ]; then
+		string="$icon$per_0%"
+	    else
+		string="$per_0%"
+
+	    fi
+	fi
+	if [ -f "$path_battery_1/status" ]; then
+	    if [ "$string" = "" ]; then
+		string=$string
+	    else
+		string="$string "
+	    fi
+
+	    if [ $(cat "$path_battery_1/status") = "Charging" ]; then
+		string="$string$icon$per_1%"
+	    else
+		string="$string$per_1%"
+
+	    fi
+	fi
+	#string="$string - $ChargeTimeEstimated$hour - $dischargeRate$watt"
+	echo $string
+    else
+	string=""
+	if [ -f "$path_battery_0/status" ]; then
+	    if [ "$per_0" -gt 85 ]; then
+		string="$string"
+	    elif [ "$per_0" -gt 60 ]; then
+		string="$string"
+	    elif [ "$per_0" -gt 40 ]; then
+		string="$string"
+	    elif [ "$per_0" -gt 10 ]; then
+		string="$string"
+	    else
+		string="$string"
+	    fi
+	    string="$string$per_0%"
+	fi
+	if [ -f "$path_battery_1/status" ]; then
+	    if [ "$string" = "" ]; then
+		string=$string
+	    else
+		string="$string  "
+	    fi
+	    if [ "$per_1" -gt 85 ]; then
+		string="$string"
+	    elif [ "$per_1" -gt 60 ]; then
+		string="$string"
+	    elif [ "$per_1" -gt 40 ]; then
+		string="$string"
+	    elif [ "$per_1" -gt 10 ]; then
+		string="$string"
+	    else
+		string="$string"
+	    fi
+	    string="$string$per_1%"
+	fi
+	if [ "$battery_percent" -gt 7 ]; then
+	    icon=""
+	elif [ "$battery_percent" -gt 4 ]; then
+	    icon=""
+	else
+	    icon=""
+	    notify-send --urgency=critical -t 200 -i /usr/share/icons/ubuntu-mono-light/status/16/gpm-primary-000.svg "Battery low! $battery_percent %"
+	fi
+	string="$string - $TimeEstimated$hour - $dischargeRate$watt"
+	echo "$string"
+    fi
+fi
+#    echo "$dischargeRate W and $TimeEstimated and $per_0% and $per_1%"
+
+
