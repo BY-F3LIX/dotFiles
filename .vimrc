@@ -34,7 +34,7 @@ set backspace=indent,eol,start	" Backspace behaviour
 map <C-n> :NERDTreeToggle<CR>
 
 ""Folding code
-set foldmethod=indent
+"set foldmethod=indent
 " Keep all folds open when a file is opened
 "augroup OpenAllFoldsOnFileOpen
  "   autocmd!

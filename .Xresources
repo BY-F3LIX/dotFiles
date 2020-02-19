@@ -15,48 +15,95 @@ URxvt.matcher.button: 1
 URxvt.colorUL: yellow
 
 URxvt.transparent:  false
-URxvt.shading:	    40
+URxvt.shading:	    10
 !URxvt.highlightSelection:false
 URxvt.tintColor: #ffffff
 URxvt.blurRadius:   10
 
+!! special
+!URxvt.foreground:   #e0e4f0
+!!URxvt.background:   #232323
+!URxvt.background:   #111111
+!URxvt.cursorColor:  #e0e4f0
+!
+!! black
+!URxvt.color0:       #ff00f2
+!URxvt.color8:       #404040
+!
+!! red
+!URxvt.color1:       #e84f4f
+!URxvt.color9:       #f55454
+!
+!! green
+!URxvt.color2:       #b8d68c
+!URxvt.color10:      #f6c189
+!
+!! yellow
+!URxvt.color3:       #ff9500
+!URxvt.color11:      #21c5f3
+!
+!! blue
+!URxvt.color4:       #7dc1cf
+!URxvt.color12:      #4e9fb1
+!
+!! magenta
+!URxvt.color5:       #64c1fb
+!URxvt.color13:      #f55454
+!
+!! cyan
+!URxvt.color6:       #6d878d
+!URxvt.color14:      #676767
+!
+!! white
+!URxvt.color7:       #dddddd
+!URxvt.color15:      #ffffff
+
+
+
+
+URxvt.perl-ext-common:  font-size
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+
+
+
 ! special
-URxvt.foreground:   #e0e4f0
-!URxvt.background:   #232323
-URxvt.background:   #111111
-URxvt.cursorColor:  #e0e4f0
+URxvt.foreground:   #515253
+URxvt.background:   #fcfdfe
+URxvt.cursorColor:  #515253
 
 ! black
-URxvt.color0:       #ff00f2
-URxvt.color8:       #404040
+URxvt.color0:       #0c0d0e
+URxvt.color8:       #737475
 
 ! red
-URxvt.color1:       #e84f4f
-URxvt.color9:       #f55454
+URxvt.color1:       #e31a1c
+URxvt.color9:       #e31a1c
 
 ! green
-URxvt.color2:       #b8d68c
-URxvt.color10:      #f6c189
+URxvt.color2:       #31a354
+URxvt.color10:      #31a354
 
 ! yellow
-URxvt.color3:       #ff9500
-URxvt.color11:      #21c5f3
+URxvt.color3:       #dca060
+URxvt.color11:      #dca060
 
 ! blue
-URxvt.color4:       #7dc1cf
-URxvt.color12:      #4e9fb1
+URxvt.color4:       #3182bd
+URxvt.color12:      #3182bd
 
 ! magenta
-URxvt.color5:       #64c1fb
-URxvt.color13:      #f55454
+URxvt.color5:       #756bb1
+URxvt.color13:      #756bb1
 
 ! cyan
-URxvt.color6:       #6d878d
-URxvt.color14:      #676767
+URxvt.color6:       #80b1d3
+URxvt.color14:      #80b1d3
 
 ! white
-URxvt.color7:       #dddddd
-URxvt.color15:      #ffffff
+URxvt.color7:       #b7b8b9
+URxvt.color15:      #fefdfe
+
 
 
 
@@ -134,13 +181,13 @@ rofi.color-window: argb:c82d303b, #7c8389, #1d1f21
 rofi.color-normal: argb:031d1f21, #c4cbd4, argb:96404552, #4084d6, #f9f9f9
 rofi.color-urgent: argb:2c1d1f21, #cc6666, argb:e54b5160, #a54242, #f9f9f9
 rofi.color-active: argb:2c1d1f21, #65acff, argb:e44b5160, #4491ed, #f9f9f9
-rofi.width: 100
+!rofi.width: 100
 rofi.lines: 5
 rofi.columns: 1
 rofi.font: System San Francisco Display 25
 !rofi.font: Noto Sans 14
-rofi.bw: 0
-rofi.padding: 500
+!rofi.bw: 0
+!rofi.padding: 500
 rofi.eh: 1
 !rofi.separator-style: solid
 rofi.hide-scrollbar: true

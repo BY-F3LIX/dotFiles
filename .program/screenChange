@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -f ~/.program/screenStat ]; then
+    temp=$(cat ~/.program/screenStat)
+    temp=$(($temp + 1))
+    echo "$temp" > ~/.program/screenStat
+    
+else
+    echo 0 > ~/.program/screenStat
+fi
+bash ~/.program/screen4 &
+
+#notify-send --icon=" " "$(~/.program/screen4)"
+#echo "$(bash ~/.program/screen4)" > ~/.program/screenOutput
+

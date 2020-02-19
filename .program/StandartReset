@@ -1,0 +1,5 @@
+#!/bin/bash
+#This file will make some standart changes to reset the apperience
+echo 0 > ~/.config/polybar/scripts/stat
+#echo 0 > ~/.program/screenStat
+#bash ~/.program/screen3 > ~/.program/screenOutput

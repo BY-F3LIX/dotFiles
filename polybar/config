@@ -21,7 +21,9 @@
 ;background = #031924
 ;background = #fffffff
 ;background = #00000000
-background = #aa78929e
+;-background = #aa78929e
+background = #aaffffff
+
 ;background = #88c0d0ea
 background-alt = #789e82
 ;foreground = #dfdfdf
@@ -48,10 +50,10 @@ enable-icp = true
 ;monitor = ${env:MONITOR:eDP-1}
 width = 100%
 ;width = 1
-height = 23
+height = 20
 ;offset-x = 50%
 ;offset-y = 10
-radius = 7.0
+radius = 4.0
 fixed-center = true
  
 ;override-redirect = true
@@ -65,7 +67,7 @@ line-color = #f00
 ;border-size = 8
 border-color = #00000000
 
-padding-left = 3
+padding-left = 2
 padding-right = 2
 
 module-margin-left = 3
@@ -76,7 +78,7 @@ module-margin-right = 2
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ;font-2 = siji:pixelsize=10;1
 
-font-0 = fixed:pixelsize=10;1
+font-0 = fixed:pixelsize=9;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
@@ -84,10 +86,10 @@ font-3 = NotoSans-Regular:size=9;0
 font-4 = Material\ Icons:size=11;2
 font-5 = xos4\ Terminus:size=14;0
 font-6 = Siji:pixelsize=11;1
-font-7 = FontAwesome:size=11;0
+font-7 = FontAwesome:size=9;0
 font-8 = Font Awesome 5 Free:pixelsize=10;3
 font-9 = Font Awesome 5 Free Solid:pixelsize=10;3
-font-10 = Font Awesome 5 Brands:pixelsize=10;3
+font-10 = Font Awesome 5 Brands:pixelsize=9;3
 
 
 ;modules-left = i3
@@ -97,16 +99,16 @@ font-10 = Font Awesome 5 Brands:pixelsize=10;3
 
 modules-left = i3 spotify mpd
 modules-center = date
-modules-right = cpuTemp eth screen2  pulseaudio-rofi-input  pulseaudio-rofi-output battery-own 
+modules-right = WIFIOff BluetoothOff powerUsage cpuUsage cpuTemp memUsage eth screen2 pulseaudio-rofi-input pulseaudio-rofi-output battery-own 
 
-;modules-center = musicapp spotify mpd filemanager thunderbird calendar whatsapp
-;xwindow
+
+
 ;modules-right = menu-apps Search
 ;modules-right = wlan backlight-acpi alsa xkeyboard cpu battery temperature battery2 date powermenu
 
 tray-position = right
-tray-padding = 4
-tray-transparent = false
+;tray-padding = 5
+;tray-transparent = false
 ;tray-background = #0063ff
 
 ;wm-restack = 
@@ -124,45 +126,6 @@ enable-ipc = true
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[module/thunderbird]
-type = custom/script
-exec = " echo "
-click-left = thunderbird &
-
-[module/whatsapp]
-type = custom/script
-exec = " echo "
-click-left = google-chrome --app=https://web.whatsapp.com &
-
-[module/musicapp]
-type = custom/script
-exec = " echo "
-click-left = spotify &
-
-[module/steam]
-type = custom/script
-exec = " echo "
-click-left = steam &
-
-[module/terminal]
-type = custom/script
-exec = " echo "
-click-left = urxvt &
-
-[module/calendar]
-type = custom/script
-exec = " echo "
-click-left = google-chrome --app=https://calendar.google.com/calendar/r &
-
-[module/firefox]
-type = custom/script
-exec = " echo "
-click-left = firefox
-
-[module/filemanager]
-type = custom/script
-exec = " echo "
-click-left = nemo &
 
 
 [module/fuck]
@@ -266,11 +229,15 @@ ws-icon-5 = 4;V
 ws-icon-6 = 5;VI
 ws-icon-7 = 6;VII
 ;ws-icon-8 = 7;VIII
-ws-icon-9 = 7;IIX
+ws-icon-8 = 7;IIX
 ;ws-icon-8 = 7;
-;ws-icon-9 = 8;IX
-ws-icon-8 = 8;
-ws-icon-0 = 9;
+ws-icon-9 = 8;IX
+;ws-icon-8 = 8;
+;ws-icon-8 = 8;
+;spotify
+;ws-icon-0 = 9;
+ws-icon-0 = 9;
+
 ws-icon-default = ERROR
 
 
@@ -459,9 +426,10 @@ date-alt = " %A, %d-%B-%Y   "
 ;date-alt = " %Y-%m-%d "
 
 time = %H:%M
-time-alt = %H:%M:%S
+time-alt =  %H:%M:%S
 
-format-prefix = 
+;format-prefix = 
+format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #0a6cf5
 
@@ -685,7 +653,8 @@ format-foreground = ${colors.secondary}
 [module/spotify]
 type = custom/script
 interval = 1
-format-prefix = " "
+;format-prefix = " "	;Character cant be displayed
+format-prefix =
 format = <label>
 exec = python ~/.config/polybar/scripts/spotify_status.py  -f '{artist}: {song}'
 ;format-underline = #1db954
@@ -704,20 +673,51 @@ type = custom/script
 intervall = 2
 exec = bash ~/.config/polybar/scripts/cpu.sh
 
+[module/WIFIOff]
+type = custom/script
+intervall = 5
+exec = echo "%{Fffff0000}$(wifi | grep -o 'off' | sed 's/off/!/g')%{F-}"
+click-left = wifi on
+
+
+[module/BluetoothOff]
+type = custom/script
+intervall = 5
+;exec = bluetooth | grep -o 'bluetooth = on'
+;exec =  echo "%{Fffff0000}$(bluetooth | grep -o 'bluetooth = on')%{F- }"
+exec =  echo "%{Fffff0000}$(bluetooth | grep -o 'bluetooth = on' | sed 's/bluetooth = on//g')%{F- }"
+click-left = bluetooth off
+
+
+[module/memUsage]
+type = custom/script
+intervall = 5
+exec = bash ~/.program/memUsage.bash 50 "MEM: " 1
+
+[module/powerUsage]
+type = custom/script
+intervall = 5
+exec = bash ~/.program/PowerUsage.sh 8 " " 1
+
+[module/cpuUsage]
+type = custom/script
+intervall = 2
+exec = bash ~/.program/cpuUsage.sh 20 " " 1
+
 [module/cpuTemp]
 type = custom/script
 intervall = 4
-exec = bash ~/.program/cpuTemp.sh 2> temp1554321; rm temp1554321
+exec = bash ~/.program/cpuTemp.sh 50 "" 1 2> temp1554321; rm temp1554321
 
 [module/screen2]
 type = custom/script
 intervall = 1
-;exec = bash ~/.program/screen3
+;exec = bash ~/.program/screen4
 exec = cat ~/.program/screenOutput
 ;click-right = "arandr &"
 ;click-right = "echo 3 > ~/.program/screenStat"
-click-right = "bash ~/.program/screenChange"
-click-left = "bash ~/.program/screen3 "
+click-right = "notify-send change; bash ~/.program/screenChange > ~/.program/log"
+click-left = "bash ~/.program/screen4 > ~/.program/log & " 
 
 [module/screen-own]
 type = custom/script

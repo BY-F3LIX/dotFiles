@@ -1,0 +1,12 @@
+#!/bin/bash
+program=$1
+if [ "$1" == "" ]; then
+    program="XXX"
+fi
+
+for x in $(/bin/ps -fu $USER| grep "$program" | grep -v "grep" | awk '{print $2}') 
+do 
+    echo $x
+    kill -9 $x 
+    pkill $x
+done

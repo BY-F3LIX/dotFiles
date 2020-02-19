@@ -1,0 +1,6 @@
+#!/bin/bash
+bash ~/.program/killthis libinput-gestures
+sleep 1
+#libinput-gestures &
+libinput-gestures-setup start &
+#notify-send gestures restarted

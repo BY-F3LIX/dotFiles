@@ -1,0 +1,127 @@
+#!/bin/bash
+#load stat file ( to switch modes)
+prefix="card0-"		    #Something that Need to be rendered out of the connection name for xrandr
+
+    
+#Get the mode we are in, either 1 or 0
+    mode=0  #default value
+    if [ -f ~/.program/screenStat ]; then
+	mode=$(cat ~/.program/screenStat)
+	mode=$(python -c "print $mode % 2") 
+    else
+	echo 0 > ~/.program/screenStat
+    fi
+
+    
+
+#Set main Laptop Output.
+    StandartOutput=""			#If the script does not work
+    #StandartOutput="HDMI-1"			#If the script does not work
+    if [ -f ~/.program/screenConf ]; then
+	StandartOutput=$(cat ~/.program/screenConf)
+    fi
+#This checks if there ouccours an error when setting StdOutput.
+    if [ "$(xrandr --output $StandartOutput > /dev/null )" != "" ]; then
+#set new StdOutput
+	StandartOutput=$(xrandr --listmonitors | sed -n '2 p' | grep -oh '[a-Z0-9\-]*$')
+    fi
+
+#This disables the mic and sound icon in the polybar. so that i just have to see them when a monitor is connected.
+    echo "" > ~/.program/mic
+    echo "" > ~/.program/sound
+
+
+#-----Load the mode we are in
+
+#values
+
+    totalLength=0
+    output=""	    #generated Output
+
+#Modes: 0=First Mirror 1=First Expand
+
+    if [ $mode == 0 ]; then
+#mode 0
+	echo mode first Mirror
+	#icon="" #monitor
+	icon=""
+    else 
+#mode 1
+	echo mode first expand
+	icon="" #laptop
+	echo $StandartOutput
+	totalLength=$(xrandr --listmonitors | grep $StandartOutput | grep -oh "[0-9]*/[0-9]*x" | grep -oh "^[0-9]*")
+	echo first total $totalLength
+
+    fi
+#-----Set the Monitors-------------
+
+
+#standart laptop output
+#Activate all outputs....
+#have to see if this is necesarry
+#    for x in $( xrandr -q | grep " connected " | grep -oh "^[a-zA-Z0-9\-]*"); do
+#	if [ "$x" != "$StandartOutput" ]; then
+#	    xrandr --output $x --pos 0x0 --mode 1920x1080
+#	    xrandr --output $x --pos 0x0 --auto
+#	fi
+#    done
+    
+
+    xrandr --output $StandartOutput --pos 0x0 --auto 
+    
+
+    for x in $( xrandr -q | grep " connected " | grep -oh "^[a-zA-Z0-9\-]*"); do
+	if [ "$x" != "$StandartOutput" ]; then
+	    xrandr --output $x --pos 0x0 --auto #to prevent resolution bug
+	    echo "" > ~/.program/mic
+	    echo "" > ~/.program/sound
+	    length=$(xrandr --listmonitors | grep +$x | grep -oh "[0-9]*/[0-9]*x" | grep -oh "^[0-9]*")
+	    hight=$(xrandr --listmonitors | grep +$x | grep -oh "x[0-9]*/[0-9]*" | grep -oh "[0-9]*/" | grep -oh "^[0-9]*")
+	    output="$output "
+	    mal='x' 
+	    notify-send -t 2000  " $x -  $length$mal$hight" -i null
+
+
+	    echo "totalLength: $totalLength"
+	    position=$totalLength"x0"
+	    xrandr --output $x --pos $position --mode $length$mal$hight
+	    #totalLength=$($totalLength + $length)
+	    totalLength=$(python -c "print $totalLength + $length") 
+
+
+	fi
+    done
+
+
+#deactivate the disconnected screens
+    for x in $( xrandr -q | grep " disconnected " | grep -oh "^[a-zA-Z0-9\-]*"); do
+#	echo $x off
+	xrandr --output $x --off
+	done
+    
+    if [ $mode == 0 ] && [ $totalLength = 1920 ]; then
+	# mode first Mirror
+	#Disable icons if your working on your laptop
+	echo "" > ~/.program/mic
+	echo "" > ~/.program/sound
+    fi
+
+
+    echo $icon $output > ~/.program/screenOutput
+    echo $icon $output
+
+    echo ""
+    bash ~/.config/polybar/scripts/pulseaudio-rofi.sh --mute_source
+    bash ~/.config/polybar/scripts/pulseaudio-rofi.sh --mute_source
+    
+    bash ~/.program/background.sh
+    bash ~/.config/polybar/launch.sh 2> /dev/null
+
+
+
+
+
+
+
+

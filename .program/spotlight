@@ -1,0 +1,87 @@
+#!/bin/bash
+buildin=false
+show=true;
+case $1 in
+y) buildin=true; firefox -P Search --class="Search" www.youtube.com;;
+w) buildin=true; show=false; bash ~/.program/background.sh;;
+cp) buildin=true; show=false; bash ~/.program/copyPaste.bash;;
+youtube) buildin=true; firefox -P Search --class="Search" www.youtube.com;;
+amazon) buildin=true; firefox -P Search --class="Search" www.amazon.de;;
+a) buildin=true; firefox -P Search --class="Search" www.amazon.de;;
+#prime) buildin=true; firefox -P Search --class="Search" "https://www.amazon.de/Amazon-Video/b?ie=UTF8&node=3010075031";;
+prime) buildin=true; show=false; google-chrome --app=https://www.amazon.de/gp/video/storefront?filterId=OFFER_FILTER=PRIME;;
+p) buildin=true; firefox -P Search --class="Search" "https://www.amazon.de/Amazon-Video/b?ie=UTF8&node=3010075031";;
+netflix) buildin=true; show=false; google-chrome --app=https://www.netflix.com;;
+youtubeapp) buildin=true; show=false; google-chrome --app=https://www.youtube.com;;
+n) buildin=true; show=false; google-chrome --app=https://www.netflix.com;;
+notion) buildin=true; show=false; google-chrome --app="https://www.notion.so" --class="google-chrome";;
+calendar) buildin=true; firefox -P Search --class="Search" https://calendar.google.com/calendar/r;;
+calender) buildin=true; firefox -P Search --class="Search" https://calendar.google.com/calendar/r;;
+kalender) buildin=true; firefox -P Search --class="Search" https://calendar.google.com/calendar/r;;
+keep) buildin=true; firefox -P Search --class="Search" https://keep.google.com/;;
+notizen) buildin=true; firefox -P Search --class="Search" https://keep.google.com/;;
+c) buildin=true; firefox -P Search --class="Search" https://calendar.google.com/calendar/r;;
+reddit) buildin=true; firefox -P Search --class="Search" https://www.reddit.com/;;
+r) buildin=true; firefox -P Search --class="Search" https://www.reddit.com/;;
+whatsapp) buildin=true; firefox -P Search --class="Search" https://web.whatsapp.com/;;
+ww) buildin=true; firefox -P Search --class="Search" https://web.whatsapp.com/;;
+moodle) buildin=true; firefox -P Search --class="Search" https://moodle.uni-ulm.de/;;
+theme) buildin=true; show=false; rofi-theme-selector
+esac
+
+echo buildin $buildin
+
+if [ "$buildin" = false ] ; then
+
+
+    first=""
+    back=""
+    for x in $1
+    do
+	if [ "$first" = "" ] ; then
+	    first=$x
+	else
+	    back="$back$x "
+	fi
+    done
+
+    echo $first
+    echo $back
+    
+    case $first in
+    y) buildin=true; firefox -P Search --class="Search" https://www.youtube.com/results?search_query="$back";;
+    youtube) buildin=true; firefox -P Search --class="Search" https://www.youtube.com/results?search_query="$back";;
+    netflix) buildin=true; show=false; google-chrome --app=https://www.netflix.com/search?q="$back";;
+    n) buildin=true; show=false; google-chrome --app=https://www.netflix.com/search?q="$back";;
+    amazon) buildin=true; firefox -P Search --class="Search" https://www.amazon.de/s?k="$back";;
+    a) buildin=true; firefox -P Search --class="Search" https://www.amazon.de/s?k="$back";;
+    prime) buildin=true; show=false; back=${back// /+}; google-chrome --app=https://www.amazon.de/s?k=$back&i=instant-video;;
+    #prime) buildin=true; show=false; back=${back// /+}; google-chrome --app=https://www.amazon.de/s?k=$back&i=instant-video&__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss;;
+    p) buildin=true; firefox -P Search --class="Search" "https://www.amazon.de/s?k=$back&i=instant-video&__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&ref=nb_sb_noss";;
+    reddit) buildin=true; firefox -P Search --class="Search" https://www.reddit.com/search/?q="$back";;
+    r) buildin=true; firefox -P Search --class="Search" https://www.reddit.com/search/?q="$back";;
+
+    de) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=de&text=$back";;
+    ger) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=de&text=$back";;
+    deutsch) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=de&text=$back";;
+    german) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=de&text=$back";;
+
+    en) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=en&text=$back";;
+    eng) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=en&text=$back";;
+    englisch) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=en&text=$back";;
+    english) buildin=true; firefox -P Search --class="Search" "https://translate.google.com/?hl=de#view=home&op=translate&sl=auto&tl=en&text=$back";;
+    esac
+
+    
+    if [ "$buildin" = false ] ; then
+    parsed=${1//+/%2B}
+    firefox -P Search --class="Search" https://www.google.de/search?q="$parsed"
+    buildin=true
+    fi
+fi
+
+if [ "$show" = true ] ; then
+    echo buildin
+    i3-msg [class="Search"] scratchpad show
+    i3-msg [class="Search"] move position center
+fi

@@ -1,80 +1,98 @@
 set $mod Mod4
 
-font pango:monospace 8
-floating_modifier ctrl
+################################################################################
+#
+#
+#				OWN VARIABLES:
+#
+#
+################################################################################
 
-bindsym $mod+Shift+q kill
+#set $Lockscreen							    ~/Dropbox/Bilder/wallpaper/nice/wallpaper.jpg
+set $Lockscreen								    ~/Dropbox/Bilder/wallpaper/nice/lockscreen.jpg
+set $wallpaper_folder							    ~/Dropbox/Bilder/wallpaper/nice/
 
 
-bindsym $mod+Shift+Return exec urxvt; exec polybar-msg cmd hide
-bindsym $mod+d exec dmenu_run
-bindsym $mod+x exec rofi -show drun -show-icons ; exec polybar-msg cmd hide
+
+font									    pango:monospace 8
+floating_modifier							    ctrl
+
+bindsym $mod+Shift+q							    kill
+
+
+bindsym $mod+Shift+Return						    exec urxvt
+#bindsym $mod+d								    exec dmenu_run
+bindsym $mod+x								    exec rofi -show drun -display-drun ""  -show-icons 
 
 
 #Focus window
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h								    focus left
+bindsym $mod+j								    focus down
+bindsym $mod+k								    focus up
+bindsym $mod+l								    focus right
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left							    focus left
+bindsym $mod+Down							    focus down
+bindsym $mod+Up								    focus up
+bindsym $mod+Right							    focus right
+
+
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h							    move left
+bindsym $mod+Shift+j							    move down
+bindsym $mod+Shift+k							    move up
+bindsym $mod+Shift+l							    move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left							    move left
+bindsym $mod+Shift+Down							    move down
+bindsym $mod+Shift+Up							    move up
+bindsym $mod+Shift+Right						    move right
+
 
 # split in horizontal orientation
-#bindsym $mod+h split h
-bindsym $mod+b split h
+#bindsym $mod+h								    split h
+bindsym $mod+b								    split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+v								    split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f								    fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
-bindsym $mod+s layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+s								    layout stacking
+#bindsym $mod+w								    layout tabbed
+bindsym $mod+s								    layout tabbed
+bindsym $mod+e								    layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+space floating toggle; exec polybar-msg cmd hide
+#bindsym $mod+space							    floating toggle
+bindsym $mod+shift+f							    floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+space focus mode_toggle
+#bindsym $mod+Shift+space						    focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+a								    focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+#bindsym $mod+d								    focus child
+bindsym $mod+q								    focus mode_toggle
 
-#set $bg-color #ffff00
-#set $bg-color #2f343f
-set $bg-color #ffffff
-#set $inactive-bg-color #000000
-set $inactive-bg-color #c0d0ea77
-#set $inactive-bg-color #2f343f
-set $text-color #ffffff
-set $inactive-text-color #000000
-#set $inactive-text-color #676E7D  
-set $urgent-bg-color #E53935  
-set $test #deb887  
+#set $bg-color								    #ffff00
+#set $bg-color								    #2f343f
+set $bg-color								    #ffffff
+#set $inactive-bg-color							    #000000
+set $inactive-bg-color							    #c0d0ea77
+#set $inactive-bg-color							    #2f343f
+set $text-color								    #ffffff
+set $inactive-text-color						    #000000
+#set $inactive-text-color						    #676E7D  
+set $urgent-bg-color							    #E53935  
+set $test								    #deb887  
 
-#set $test #00E4FF    # Blau
 
 # window colors
 #                       border              background         text                 indicator
@@ -88,19 +106,6 @@ client.urgent  $urgent-bg-color $urgent-bg-color $text-color #E53935
 
 
 #workspace naming
-#takes just effect with i3bar
-#set $workspace1 "1 "
-#set $workspace2 "2 "
-#set $workspace3 "3 "
-#set $workspace4 "4 "
-#set $workspace5 "5 "
-#set $workspace6 "6 "
-#set $workspace7 "7 "
-#set $workspace8 "8 "
-#set $workspace9 "9 "
-#set $workspace10 "10 "
-
-
 
 #set $workspace1 "I"
 #set $workspace2 "II"
@@ -125,45 +130,44 @@ set $workspace9 "8"
 set $workspace10 "9"
 
 #               "
-#with autohide polybar
-bindsym Mod1+1 move container to workspace $workspace1; workspace $workspace1; exec polybar-msg cmd hide
-bindsym Mod1+2 move container to workspace $workspace2; workspace $workspace2; exec polybar-msg cmd hide
-bindsym Mod1+3 move container to workspace $workspace3; workspace $workspace3; exec polybar-msg cmd hide
-bindsym Mod1+4 move container to workspace $workspace4; workspace $workspace4; exec polybar-msg cmd hide
-bindsym Mod1+5 move container to workspace $workspace5; workspace $workspace5; exec polybar-msg cmd hide
-bindsym Mod1+6 move container to workspace $workspace6; workspace $workspace6; exec polybar-msg cmd hide
-bindsym Mod1+7 move container to workspace $workspace7; workspace $workspace7; exec polybar-msg cmd hide
-bindsym Mod1+8 move container to workspace $workspace8; workspace $workspace8; exec polybar-msg cmd hide
-bindsym Mod1+9 move container to workspace $workspace9; workspace $workspace9; exec polybar-msg cmd hide
-bindsym Mod1+0 move container to workspace $workspace10; workspace $workspace10; exec polybar-msg cmd hide
-bindsym Mod1+dead_circumflex move container to workspace $workspace10; workspace $workspace10; exec polybar-msg cmd hide
+bindsym Mod1+1 move container to workspace $workspace1; workspace $workspace1
+bindsym Mod1+2 move container to workspace $workspace2; workspace $workspace2
+bindsym Mod1+3 move container to workspace $workspace3; workspace $workspace3
+bindsym Mod1+4 move container to workspace $workspace4; workspace $workspace4
+bindsym Mod1+5 move container to workspace $workspace5; workspace $workspace5
+bindsym Mod1+6 move container to workspace $workspace6; workspace $workspace6
+bindsym Mod1+7 move container to workspace $workspace7; workspace $workspace7
+bindsym Mod1+8 move container to workspace $workspace8; workspace $workspace8
+bindsym Mod1+9 move container to workspace $workspace9; workspace $workspace9
+bindsym Mod1+0 move container to workspace $workspace10; workspace $workspace10
+#bindsym Mod1+dead_circumflex move container to workspace $workspace10; workspace $workspace10
 
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1; exec polybar-msg cmd hide
-bindsym $mod+2 workspace $workspace2; exec polybar-msg cmd hide
-bindsym $mod+3 workspace $workspace3; exec polybar-msg cmd hide
-bindsym $mod+4 workspace $workspace4; exec polybar-msg cmd hide
-bindsym $mod+5 workspace $workspace5; exec polybar-msg cmd hide
-bindsym $mod+6 workspace $workspace6; exec polybar-msg cmd hide
-bindsym $mod+7 workspace $workspace7; exec polybar-msg cmd hide
-bindsym $mod+8 workspace $workspace8; exec polybar-msg cmd hide
-bindsym $mod+9 workspace $workspace9; exec polybar-msg cmd hide
-bindsym $mod+0 workspace $workspace10; exec polybar-msg cmd hide
-bindsym $mod+dead_circumflex workspace $workspace10; exec polybar-msg cmd hide
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+#bindsym $mod+dead_circumflex workspace $workspace10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1; exec polybar-msg cmd hide
-bindsym $mod+Shift+2 move container to workspace $workspace2; exec polybar-msg cmd hide
-bindsym $mod+Shift+3 move container to workspace $workspace3; exec polybar-msg cmd hide
-bindsym $mod+Shift+4 move container to workspace $workspace4; exec polybar-msg cmd hide
-bindsym $mod+Shift+5 move container to workspace $workspace5; exec polybar-msg cmd hide
-bindsym $mod+Shift+6 move container to workspace $workspace6; exec polybar-msg cmd hide
-bindsym $mod+Shift+7 move container to workspace $workspace7; exec polybar-msg cmd hide
-bindsym $mod+Shift+8 move container to workspace $workspace8; exec polybar-msg cmd hide
-bindsym $mod+Shift+9 move container to workspace $workspace9; exec polybar-msg cmd hide
-bindsym $mod+Shift+0 move container to workspace $workspace10; exec polybar-msg cmd hide
-bindsym $mod+Shift+dead_circumflex move container to workspace $workspace10; exec polybar-msg cmd hide
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+#bindsym $mod+Shift+dead_circumflex move container to workspace $workspace10
 
 
 
@@ -182,46 +186,9 @@ bindsym $mod+Mod1+j move workspace to output primary
 
 
 
-#bindsym Mod1+1 move container to workspace $workspace1; workspace $workspace1
-#bindsym Mod1+2 move container to workspace $workspace2; workspace $workspace2
-#bindsym Mod1+3 move container to workspace $workspace3; workspace $workspace3
-#bindsym Mod1+4 move container to workspace $workspace4; workspace $workspace4
-#bindsym Mod1+5 move container to workspace $workspace5; workspace $workspace5
-#bindsym Mod1+6 move container to workspace $workspace6; workspace $workspace6
-#bindsym Mod1+7 move container to workspace $workspace7; workspace $workspace7
-#bindsym Mod1+8 move container to workspace $workspace8; workspace $workspace8
-#bindsym Mod1+9 move container to workspace $workspace9; workspace $workspace9
-#bindsym Mod1+0 move container to workspace $workspace10; workspace $workspace10
-#
-#
-## switch to workspace
-#bindsym $mod+1 workspace $workspace1
-#bindsym $mod+2 workspace $workspace2
-#bindsym $mod+3 workspace $workspace3
-#bindsym $mod+4 workspace $workspace4
-#bindsym $mod+5 workspace $workspace5
-#bindsym $mod+6 workspace $workspace6
-#bindsym $mod+7 workspace $workspace7
-#bindsym $mod+8 workspace $workspace8
-#bindsym $mod+9 workspace $workspace9
-#bindsym $mod+0 workspace $workspace10
-#
-## move focused container to workspace
-#bindsym $mod+Shift+1 move container to workspace $workspace1
-#bindsym $mod+Shift+2 move container to workspace $workspace2
-#bindsym $mod+Shift+3 move container to workspace $workspace3
-#bindsym $mod+Shift+4 move container to workspace $workspace4
-#bindsym $mod+Shift+5 move container to workspace $workspace5
-#bindsym $mod+Shift+6 move container to workspace $workspace6
-#bindsym $mod+Shift+7 move container to workspace $workspace7
-#bindsym $mod+Shift+8 move container to workspace $workspace8
-#bindsym $mod+Shift+9 move container to workspace $workspace9
-#bindsym $mod+Shift+0 move container to workspace $workspace10
-
-
 #tab workspaces
-bindsym $mod+Shift+Tab workspace prev; exec "polybar-msg cmd hide"
-bindsym $mod+Tab workspace next; exec "polybar-msg cmd hide"
+bindsym $mod+Shift+Tab							    workspace prev_on_output
+bindsym $mod+Tab							    workspace next_on_output
 
 
 
@@ -234,15 +201,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        #bindsym j resize shrink width 10 px or 10 ppt
-        #bindsym k resize grow height 10 px or 10 ppt
-        #bindsym l resize shrink height 10 px or 10 ppt
-        #bindsym odiaeresis resize grow width 10 px or 10 ppt
 
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
@@ -260,28 +218,43 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
 # Indirekter Resize mode. vim shortcuts
 bindsym $mod+Control+j resize shrink height 10 px or 10 ppt
 bindsym $mod+Control+h resize shrink width 10 px or 10 ppt
 bindsym $mod+Control+k resize grow height 10 px or 10 ppt
 bindsym $mod+Control+l resize grow width 10 px or 10 ppt
 
+
+bindsym $mod+Control+Down resize shrink height 10 px or 10 ppt
+bindsym $mod+Control+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Control+Up resize grow height 10 px or 10 ppt
+bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
+
+
+
 #bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        #status_command i3status
-        i3bar_command $HOME/.config/polybar/launch.sh
-}
+#bar {
+#        #status_command i3status
+#        i3bar_command $HOME/.config/polybar/launch.sh
+#}
+
+exec_always								    $HOME/.config/polybar/launch.sh
+
+
 #ende i3 standarts
 #start i3 gaps :D
 
-gaps inner 10
-gaps outer 1
+gaps									    inner 12
+gaps 									    outer 2
 
-smart_gaps on
-smart_borders on
+#smart_gaps on
+smart_borders								    on
+
+hide_edge_borders							    both
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -317,245 +290,320 @@ mode "$mode_gaps_outer" {
 	bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-hide_edge_borders both
 
+################################################################################
+#
+#
+#				OWN KEYBINDS:
+#
+#
+################################################################################
 
+bindsym $mod+r								    exec bash ~/.program/switchWindow.sh
+#bindsym $mod+r								    exec rofi -show window -display-window "find: " -lines 10
+#Standards:
 
-#own bindsyms
-bindsym $mod+Shift+d exec bash ~/.program/dropboxSync.sh
-bindsym $mod+Shift+s exec pavucontrol
-#bindsym $mod+Shift+x exec betterlockscreen -l blur 
-#bindsym $mod+Shift+g exec steam; exec Spotify
-bindsym $mod+n exec nemo; exec polybar-msg cmd hide
-bindsym $mod+Shift+n exec google-chrome --app=https://www.netflix.com; exec polybar-msg cmd hide
-bindsym $mod+i exec google-chrome --app=https://keep.google.com/; exec polybar-msg cmd hide
-bindsym $mod+Shift+w exec google-chrome --app=https://web.whatsapp.com/; exec polybar-msg cmd hide
-bindsym $mod+t exec google-chrome --app=https://translate.google.com; exec polybar-msg cmd hide
-bindsym $mod+o exec google-chrome --app=https://www.google.com; exec polybar-msg cmd hide
-bindsym $mod+Shift+m exec google-chrome --app=https://www.google.de/maps; exec polybar-msg cmd hide
-bindsym $mod+Shift+y exec google-chrome --app=https://www.youtube.com; exec polybar-msg cmd hide
-bindsym $mod+Shift+c exec google-chrome --app=https://calendar.google.com/calendar/r; exec polybar-msg cmd hide
-bindsym $mod+Shift+t exec google-chrome --app=https://www.twitch.tv/; exec polybar-msg cmd hide
+bindsym $mod+Shift+d							    exec bash ~/.program/dropboxSync.sh
+bindsym $mod+Shift+s							    exec pavucontrol
+bindsym $mod+n								    exec nemo
+bindsym $mod+Return							    exec firefox
+bindsym $mod+shift+control+p							    exec firefox --private-window
 
-#bindsym $mod+Shift+n exec nemo ~/Dropbox/UNI/EidI
-bindsym $mod+Shift+b exec urxvt -cd "/home/felix/Dropbox/UNI/EidI"
-#bindsym $mod+Shift+d exec dropbox start 
-bindsym $mod+Return exec firefox; exec polybar-msg cmd hide
-bindcode shift+235 exec bash ~/.program/screenChange
-bindcode 235 exec bash ~/.program/screen3
-bindcode 245 exec blueman-applet
-bindsym $mod+u fullscreen disable; floating enable; resize set 532 300; sticky enable; move position 1373 765; exec polybar-msg cmd hide
-bindsym $mod+shift+u fullscreen disable; floating enable; resize set 1200 800; sticky disable; move position 360 140; exec polybar-msg cmd hide
-bindcode 179 exec "rxvt -e sudo vim .config/i3/config"
-#bindsym 179 exec firefox
-bindsym $mod+F11 exec screenkey -t 0.2 --no-systray
-bindsym $mod+shift+F11 exec pkill screenkey
+#F_X Keys / Statusleiste
+bindcode 245								    exec blueman-applet	#Bluetooth
+bindcode 179								    exec "rxvt -e sudo vim .config/i3/config"
+bindsym $mod+F11							    exec screenkey -t 0.2 --no-systray
+bindsym $mod+shift+F11							    exec pkill screenkey
 
-#status leiste bottons
+#Chrome
+bindsym $mod+Shift+n							    exec google-chrome --app=https://www.netflix.com
+bindsym $mod+plus							    exec google-chrome --app="https://www.notion.so"
 
+bindsym $mod+u								    fullscreen disable; floating toggle; resize set 532 300; sticky enable; move position 1373 765
+bindsym $mod+shift+u							    fullscreen disable; floating disable; sticky disable
 
-#executes
-#exec pulseaudio --start
-#exec pulseaudio --kill
-#exec_always libinput-gestures -r
-#exec_always sudo libinput-gestures -r
-exec --no-startup-id thunderbird
-exec --no-startup-id spotify
-exec killall -q dunst
-exec dunst
-exec pulseaudio --start
-exec --no-startup-id compton
-#exec --no-startup-id thunderbird
-exec_always libinput-gestures
-#exec_always sudo libinput-gestures
-exec nm-applet
-exec kdeconnect-indicator
-#exec blueman-applet 
-exec bluetooth off
-exec_always xrdb -merge ~/.Xresources
-#lockscreen and wallpaper
-exec_always betterlockscreen -u ~/Pictures/wallpaper/nice/wallpaper.jpg
-exec_always betterlockscreen -u ~/Dropbox/Bilder/wallpaper/nice/wallpaper.jpg
-#exec alias background="feh --bg-fill --no-xinerama"
-exec_always feh --bg-fill  --no-xinerama ~/Pictures/wallpaper.jpg
-exec_always feh --bg-fill  --no-xinerama ~/Bilder/wallpaper.jpg
-exec_always sleep 2; feh --bg-fill  --no-xinerama ~/Dropbox/Bilder/wallpaper/nice/wallpaper.jpg
-#exec nitrogen --restore
-exec sleep 40; ~/.program/dropboxSync.sh
-exec bash ~/.program/nextcloudStop.sh
+#Screen
+bindcode shift+235							    exec bash ~/.program/screenChange
+bindsym $mod+shift+F7							    exec bash ~/.program/screenChange
+bindcode 235								    exec bash ~/.program/screen4
+bindsym $mod+F7								    exec bash ~/.program/screen4
 
-# Disable caps lock
-exec setxkbmap -option ctrl:nocaps
-# Enable caps lock
-#exec_always setxkbmap -option
-
-
-
+#wallpaper
+bindsym $mod+control+w							    exec feh --no-fehbg --bg-fill --randomize -r $wallpaper_folder
 
 #HIDE POLYBAR!!!
 #show polybar on release of mod key
-bindcode 133 --release exec  polybar-msg cmd hide
-bindcode 133 exec "polybar-msg cmd show; ~/.local/bin/flash_window"
-exec_always polybar-msg cmd hide
-#bindcode 96 exec polybar-msg cmd toggle nicht nötig, einfach windwos strg
-#bindcode 133 --release exec bash ~/.program/hideIt.sh --name polybar-example_eDP-1 --toggle
-#bindcode 133 --press exec bash /tmp/hideIt.sh --name polybar-example_eDP- --toggle
-#bindsym $mod+shift+p exec bash ~/.program/hideIt.sh -N polybar-example_eDP-1 --signal -d top
-exec_always bash ~/.program/hideIt.sh -N polybar-example_eDP-1 --signal -d top
-
-
-#move spotifybindsym $MOD+[?] exec foo -g 150x150+1600+150
-#for_window [class="Spotify"] floating enabled
-for_window [class="floating"] floating enabled
-for_window [class="Spotify"] resize set 1200 800
-for_window [class="Spotify"] move up 240px move left 200
-#bindsym $mod+ctrl+s [class="Spotify"] move container to workspace $workspace10; [class="Spotify"] floating disable
-#bindsym $mod+s [class="Spotify"] floating enable; [class="Spotify"] move container to workspace current
-#TODO
-#erweitern mit zwischensuche
-#polybar dropdown
-#hdmi hotplug
-
-
-
-
-
-#firefox tests
-#bindsym $mod+o exec firefox -P Search --class="Search"  www.google.com
-#bindsym $mod+t exec firefox -P Search --class="Search"  https://translate.google.com
-#bindsym $mod+Shift+o exec firefox -P Netflix --class="testing www.netflix.com
-
-for_window [class="Search"] floating enabled
-for_window [class="Search"] floating enabled
-for_window [class="Search"] resize set 1200 700
-for_window [class="Search"] move up 240
-
-
-for_window [class="Google-chrome"] floating enabled
-for_window [class="Google-chrome"] resize set 1200 800
-for_window [class="Google-chrome"] move position 360 140
-
-#for_window [class="Firefox"] resize set 1200 800
-#for_window [class="Firefox"] move position 400 100
+bindcode $mod+94							    exec polybar-msg cmd toggle
+#bindcode 133 --release							    exec  polybar-msg cmd hide; 
+#bindcode 133 --release							    exec "python3 ~/.program/newWorkspace.py; "
+bindsym $mod+space						    exec "python3 ~/.program/newWorkspace.py; "
+bindsym Mod1+space						    exec "python3 ~/.program/moveNewWorkspace.py; "
+#bindcode 133 --release							    exec "feh --no-fehbg --bg-fill --randomize -r $wallpaper_folder; python3 ~/.program/newWorkspace.py; "
+#bindcode 133								    exec "polybar-msg cmd show; ~/.local/bin/flash_window; xcalib -clear;"
+bindcode 133								    exec "xcalib -clear;"
+bindsym Mod1+Tab							    workspace back_and_forth
+#exec_always								    bash ~/.program/hideIt.sh -N polybar-example_eDP-1 --signal -d top
 
 #ScreenShots
-exec_always cd ~/Pictures; mkdir ScreenShot;
-bindsym --release $mod+Print exec "scrot $HOME/Pictures/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png; notify-send -t 1000 screenshot taken"
-bindsym --release $mod+Control+Print exec "polybar-msg cmd hide; sleep 1; scrot $HOME/Pictures/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png; notify-send -t 1000 screenshot taken"
-#bindsym --release $mod+Print exec scrot $HOME/Bilder/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png
-bindsym --release $mod+shift+Print exec "scrot -u $HOME/Pictures/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png; notify-send -t 1000 WINDOWshot taken"
-#bindsym --release $mod+Shift+Print exec scrot -s $HOME/Pictures/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png
+
+set $notify								    find ~/Pictures/ScreenShot/ | sort | tail -n 1 | xargs  -I {} sh -c 'notify-send -i {} Screenshot';
+exec									    cd ~/Pictures; mkdir ScreenShot;
+#Fullscreen
+bindsym --release $mod+Print						    exec "scrot $HOME/Pictures/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png;  $notify"
+#Hide polybar
+bindsym --release $mod+Control+Print					    exec "polybar-msg cmd hide; sleep 1; scrot $HOME/Pictures/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png; $notify"
+#window shot
+bindsym --release $mod+shift+Print					    exec "scrot -u $HOME/Pictures/ScreenShot/`date +%Y-%m-%d_%H:%M:%S`.png; notify-send -t 1000 WINDOWshot taken; $notify"
 
 
-for_window [class="^.*"] border pixel 2
+#Better PulseAudio control with Rofi-Script from Polybar
+bindsym XF86AudioRaiseVolume						    exec --no-startup-id "~/.config/polybar/scripts/pulseaudio-rofi.sh --volume_up; notify-send -t 1000  -i $(~/.config/polybar/scripts/pulseaudio-rofi.sh --output_volume)"
+bindsym XF86AudioLowerVolume						    exec --no-startup-id "~/.config/polybar/scripts/pulseaudio-rofi.sh --volume_down; notify-send -t 1000  -i $(~/.config/polybar/scripts/pulseaudio-rofi.sh --output_volume)"
+bindsym XF86AudioMute							    exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-rofi.sh --mute # mute sound
+bindsym XF86AudioMicMute						    exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-rofi.sh --mute_source # mute mic
 
-for_window [class="Spotify"] move to workspace $workspace10
-assign [class="Steam"] $workspace9
-assign [class="TeamSpeak 3"] $workspace9
-assign [class="discord"] $workspace9
-assign [class="Thunderbird"] $workspace9
-assign [class="geometrydash.exe"] $workspace7
-assign [class="Wine"] $workspace7
-assign [class="Mail"] $workspace9
-for_window [class="Steam"] move to workspace $workspace9
-assign [class="VirtualBox"] $workspace7
+
+# Media player controls
+bindsym XF86AudioPlay							    exec playerctl play
+bindsym XF86AudioPause							    exec playerctl pause
+bindsym XF86AudioNext							    exec playerctl next
+bindsym XF86AudioPrev 							    exec playerctl previous
+
+#Brightnes control
+bindsym XF86MonBrightnessUp						    exec " sudo light -A 10; notify-send -t 1000 $(light  -G | cut -d. -f1)'%'"
+bindsym XF86MonBrightnessDown						    exec " sudo light -U 10; notify-send -t 1000 $(light  -G | cut -d. -f1)'%'"
+
+# lock screen Betterlockscreen
+#lock and lock&Suspend with screenshot
+#bindsym $mod+shift+Delete						    exec --no-startup-id "polybar-msg cmd hide; scrot temp.png; rm ~/.cache/i3lock/current/dim.png; convert temp.png -blur 0x8 ~/.cache/i3lock/current/dim.png ; rm temp.png; cp ~/.cache/i3lock/current/dim.png ~/.cache/i3lock/current/l_dim.png; betterlockscreen -l dim -t; bash ~/.program/restartLibinput;"
+#bindsym $mod+Delete							    exec --no-startup-id "polybar-msg cmd hide; scrot temp.png; rm ~/.cache/i3lock/current/dim.png; convert temp.png -blur 0x8 ~/.cache/i3lock/current/dim.png ; rm temp.png; cp ~/.cache/i3lock/current/dim.png ~/.cache/i3lock/current/l_dim.png; betterlockscreen -s dim -t; bash ~/.program/restartLibinput;"
+#just lock
+bindsym $mod+shift+End							    exec --no-startup-id "betterlockscreen -l blur -t ; bash ~/.program/restartLibinput;"
+# lock screen and suspend
+bindsym $mod+End							    exec  xset s activate
+#bindsym $mod+End							    exec  xset dpms force suspend
+
+
+
+
+################################################################################
+#
+#
+#				OWN EXECUTES:
+#
+#
+################################################################################
+
+exec_always								    echo $Lockscreen > ~/.program/lockscreen.temp
+
+
+#exec_always								    libinput-gestures -r
+#exec_always								    bash ~/.program/restartLibinput
+
+#Program Starts:
+exec									    --no-startup-id thunderbird
+exec									    --no-startup-id spotify
+
+
+#Notification
+exec									    killall -q dunst
+exec 									    dunst
+
+#Deamons:
+exec									    pulseaudio --start
+exec 									    --no-startup-id compton
+
+#exec_always								    ~/.program/killthis libinput-gestures; sleep 1; libinput-gestures
+exec_always								    bash ~/.program/restartLibinput
+exec									    nm-applet
+#exec									    kdeconnect-indicator
+
+# Disable caps lock
+exec									    setxkbmap -option ctrl:nocaps
+# Enable caps lock
+#exec_always								    setxkbmap -option
+
+#ETC
+exec									    bluetooth off
+exec_always								    xrdb -merge ~/.Xresources
+exec									    sleep 40; ~/.program/dropboxSync.sh
+exec 									    bash ~/.program/nextcloudStop.sh
+#hide polybar
+#exec_always								    polybar-msg cmd hide
+
+#lockscreen and wallpaper
+exec_always								    betterlockscreen -u $Lockscreen
+#change wallpaper every 5 minutes to wallpaper in wallpaper_folder
+exec									    --no-startup-id systemd-run --on-calendar="*:0/5" --user -- \/usr/bin/feh --no-fehbg --bg-fill --randomize -r $wallpaper_folder
+exec_always								    feh --no-fehbg --bg-fill --randomize -r $wallpaper_folder
+
+
+#keyboard backlight
+#set keyboard backlight to middle
+exec_always								    sleep 1;  dbus-send --system --type=method_call  --dest="org.freedesktop.UPower" "/org/freedesktop/UPower/KbdBacklight" "org.freedesktop.UPower.KbdBacklight.SetBrightness" int32:1
+
+#exec_always								    "setxkbmap -layout us,de"
+
+#uncomment this one:
+#exec_always								    --no-startup-id ~/.local/bin/flashfocus
+
+#bindsym $mod+shift+z							    exec --no-startup-id ~/.local/bin/flash_window
+
+exec_always								    ~/.program/StandartReset
+#exec									    sleep 10; xss-lock -- bash ~/.program/lock.sh
+
+exec_always								    bash ~/.program/locklock.sh
+
+
+################################################################################
+#
+#
+#				WINDOW SPECIFIC:
+#
+#
+################################################################################
+
+#Remove title from every window
+for_window [class="^.*"]						    border pixel 2
+
+#for_window [class="Spotify"] move to workspace $workspace10
+assign [class="Steam"]							    $workspace9
+assign [class="TeamSpeak 3"]						    $workspace9
+assign [class="discord"]						    $workspace9
+assign [class="Thunderbird"]						    $workspace10
+assign [class="geometrydash.exe"]					    $workspace7
+assign [class="Wine"]							    $workspace7
+assign [class="Mail"]							    $workspace9
+for_window [class="Steam"]						    move to workspace $workspace9
+assign [class="VirtualBox"]						    $workspace7
 no_focus [class="Spotify"]
 no_focus [class="Thunderbird"]
 no_focus [class="Steam"]
 no_focus [class="csgo_linux64"]
-for_window [class="blueman-manager"] floating enable
-for_window [class="gnome-calculator"] floating enable
-for_window [class="Gnome-claculator"] floating enable
-for_window [instance = "Calculator"] floating enable
-for_window [instance = "pavucontrol"] floating enable
-for_window [instance = "pavucontrol"] resize set 800 600
-for_window [instance = "pavucontrol"] move position 600 300
-#for_window [class="nemo"] floating enable
-#for_window [class="Nemo"] floating enable
-#for_window [class="Nemo"] resize set 900 500
+no_focus [class="discord"]
+for_window [class="blueman-manager"]					    floating enable
+for_window [class="gnome-calculator"]					    floating enable
+for_window [class="Gnome-claculator"]					    floating enable
+for_window [instance = "Calculator"]					    floating enable
+for_window [instance = "pavucontrol"]					    floating enable
+for_window [instance = "pavucontrol"] 					    resize set 800 600
+for_window [instance = "pavucontrol"] 					    move position center
 
 
-#for_window [class="^Steam$" title="^Friends$"] floating enable
-for_window [class="^Steam$" title="Steam - News"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
-for_window [class="^Steam$" title="^Settings$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
-for_window [class="^Steam$" title=".* CD key"] floating enable
-for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-for_window [title="^Steam Keyboard$"] floating enabled
-for_window [class="^Steam$" title=".* - Chat"] resize set 475 351
+for_window [class="^Steam$" title="Steam - News"]			    floating enable
+for_window [class="^Steam$" title=".* - Chat"]				    floating enable
+for_window [class="^Steam$" title="^Settings$"]				    floating enable
+for_window [class="^Steam$" title=".* - event started"]			    floating enable
+for_window [class="^Steam$" title=".* CD key"]				    floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"]		    floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"]		    floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"]	floating enable
+for_window [title="^Steam Keyboard$"]					    floating enabled
+for_window [class="^Steam$" title=".* - Chat"]				    resize set 475 351
 
-
-
-
-# Pulse Audio controls
-#increse sound volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%; notify-send -t 1000 -i $(~/.config/polybar/scripts/pulseaudio-rofi.sh --output_volume)"
-#decrease sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%; notify-send -t 1000 -i $(~/.config/polybar/scripts/pulseaudio-rofi.sh --output_volume)"
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle;  exec --no-startup-id pactl set-sink-mute 1 toggle# mute sound
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 0 toggle; exec --no-startup-id pactl set-source-mute 1 toggle # mute mic
-
-# Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-#Brightnes control
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 20
-
-bindsym XF86MonBrightnessUp exec " sudo light -A 10; notify-send -t 1000 $(light  -G | cut -d. -f1)'%'"
-bindsym XF86MonBrightnessDown exec " sudo light -U 10; notify-send -t 1000 $(light  -G | cut -d. -f1)'%'"
+for_window [class="google-chrome"]					    floating enable
+#for_window [class="notion"]						    move scratchpad
+for_window [class="google-chrome"]					    resize set 1800 950
+for_window [class="google-chrome"]					    move position center
 
 #exec_always sudo light -N 1
+for_window [instance = "Hexxagon"] 					    floating enable
+
+################################################################################
+#
+#
+#				SCCRATCHPAD:
+#
+#
+################################################################################
+
+
+#make any window scatchpad
+bindsym $mod+Shift+minus						    floating enable; resize set 1800 950 ; mark "minus"; move scratchpad
+bindsym $mod+minus							    [con_mark="minus"] scratchpad show; [con_mark="minus"] move position center
+
+bindsym $mod+Shift+comma						    floating enable; resize set 1800 950; mark "comma"; move scratchpad
+bindsym $mod+comma							    [con_mark="comma"] scratchpad show; [con_mark="comma"] move position center
+
+
+bindsym $mod+Shift+period						    floating enable; resize set 1800 950 ; mark "period"; move scratchpad
+bindsym $mod+period							    [con_mark="period"] scratchpad show; [con_mark="period"] move position center
+
+
+#[class="Spotify"] sticky enable
+# i3-msg [class="Spotify"] move position 20 960
+#  i3-msg [class="Spotify"] resize set 1880 100
 
 
 
+#Spotify
+for_window [class="Spotify"]						    floating enable
+for_window [class="Spotify"] 						    move scratchpad
+for_window [class="Spotify"] 						    resize set 1800 950
+for_window [class="Spotify"] 						    scratchpad show
+for_window [class="Spotify"] 						    move position center
+exec_always								    i3-msg [class="Spotify"] move scratchpad
+bindsym $mod+dead_circumflex						    [class="Spotify"] resize set 1800 950; [class="Spotify"] scratchpad show; [class="Spotify"] move position center; [class="Spotify"] sticky disable; 
+bindsym $mod+shift+dead_circumflex					    [class="Spotify"] resize set 800 99; [class="Spotify"] scratchpad show; [class="Spotify"] move position 560 960; [class="Spotify"] sticky enable; 
 
-# lock screen
-#bindsym $mod+Delete exec --no-startup-id "i3lock -c b3cbf2"
-# lock screen and suspend
-#bindsym $mod+End exec --no-startup-id "i3lock -c  b3cbf2 && systemctl suspend"
-# lock and hibernate
-#bindsym $mod+Insert exec --no-startup-id "i3lock -c  b3cbf2 && systemctl hibernate"
+#Term1
+for_window [instance="Term1"]						    floating enable
+for_window [instance="Term1"] 						    resize set 900 200
+for_window [instance="Term1"] 						    move position 510 20
+for_window [instance="Term1"] 						    move scratchpad
+for_window [instance="Term1"] 						    scratchpad show
+#for_window [instance="Term1"] 						    sticky enable
+exec_always								    i3-msg [instance="Term1"] move scratchpad
+exec									    urxvt -name Term1
+bindsym $mod+w								    [instance="Term1"] scratchpad show;
+#bindsym $mod+w								    [instance="Term1"] scratchpad show; [instance="Term1"] move position center
+bindsym $mod+shift+w							    exec urxvt -name Term1
 
+#Term2 Calc
+for_window [instance="Term2"]						    floating enable
+for_window [instance="Term2"] 						    resize set 1800 950
+for_window [instance="Term2"] 						    move scratchpad
+for_window [instance="Term2"] 						    scratchpad show
+for_window [instance="Term2"]						    move position center
+exec									    urxvt -name Term2
+exec_always								    i3-msg [instance="Term2"] move scratchpad
+bindsym $mod+c								    [instance="Term2"] scratchpad show; [instance="Term2"] move position center
+bindsym $mod+shift+c							    exec urxvt -name Term2
 
-# lock screen Betterlockscreen
-#bindsym $mod+Delete exec --no-startup-id "~/.program/betterlockscreen/betterlockscreen -l blur"
-# lock screen and suspend
-bindsym $mod+shift+End exec --no-startup-id "betterlockscreen -s blur -t ; sudo libinput-gestures -r;"
-#bindsym $mod+shift+End exec --no-startup-id "systemctl suspend && betterlockscreen -l blur"
-#bindsym $mod+shift+End exec --no-startup-id "systemctl suspend && ~/.program/betterlockscreen/betterlockscreen -l blur"
-#bindsym $mod+shift+End exec --no-startup-id "~/.program/betterlockscreen/betterlockscreen -l blur && systemctl suspend"
-# lock and hibernate
-#bindsym $mod+Insert exec --no-startup-id " ~/.program/betterlockscreen/betterlockscreen -l blur && systemctl hibernate"
+for_window [class="Search"]						    floating enable
+for_window [class="Search"] 						    resize set 1800 950
+for_window [class="Search"] 						    move scratchpad
+for_window [class="Search"] 						    scratchpad show
+for_window [class="Search"] 						    move position center
 
-# lock screen Betterlockscreen
-#bindsym $mod+Delete exec --no-startup-id "~/.program/betterlockscreen/betterlockscreen -l blur"
-#bindsym $mod+End exec --no-startup-id "~/.program/betterlockscreen/betterlockscreen -l blur"
-bindsym $mod+Delete exec --no-startup-id "polybar-msg cmd hide; scrot temp.png; rm ~/.cache/i3lock/current/dim.png; convert temp.png -blur 0x8 ~/.cache/i3lock/current/dim.png ; rm temp.png; cp ~/.cache/i3lock/current/dim.png ~/.cache/i3lock/current/l_dim.png; betterlockscreen -l dim -t; sudo libinput-gestures -r;"
-bindsym $mod+shift+Delete exec --no-startup-id "polybar-msg cmd hide; scrot temp.png; rm ~/.cache/i3lock/current/dim.png; convert temp.png -blur 0x8 ~/.cache/i3lock/current/dim.png ; rm temp.png; cp ~/.cache/i3lock/current/dim.png ~/.cache/i3lock/current/l_dim.png; betterlockscreen -s dim -t; sudo libinput-gestures -r;"
-bindsym $mod+End exec --no-startup-id "betterlockscreen -l blur -t ; sudo libinput-gestures -r;"
+#bindsym $mod+shift+space						    exec  "echo '' | rofi -dmenu -p 'Search' | xargs -I{} firefox -P Search --class='Search' https://www.google.de/search?q={}; i3-msg [class='Search'] scratchpad show; i3-msg [class='Search'] move position center";
+exec_always								    i3-msg [class="Search"] move scratchpad
+bindsym Mod1+x   							    exec "echo '' | rofi -dmenu -p 'Search ' -lines 0 | xargs -I{} bash ~/.program/spotlight {}";
+bindsym $mod+shift+y							    exec firefox -P Search --class="Search"
+bindsym $mod+y								    [class="Search"] scratchpad show; [class="Search"] move position center
+
+################################################################################
+#
+#
+#				SOME SETTINGS:
+#
+#
+################################################################################
+
 
 #Monitor Management
-#set $monitor_one "HDMI-0"
-#set $monitor_two "DVI-D-0"
+#set $monitor_one							    "HDMI-0"
+#set $monitor_two							    "DVI-D-0"
 
-#workspace $workspace10 output $monitor_two
-#workspace $workspace9 output $monitor_two
-#workspace $workspace8 output $monitor_two
-#workspace $workspace2 output $monitor_two
-
-
-#workspace $workspace1 output $monitor_one
-
+#workspace $workspace10							    output $monitor_two
+#workspace $workspace9							    output $monitor_two
+#workspace $workspace8 							    output $monitor_two
+#workspace $workspace2 							    output $monitor_two
+#-----------------------------------------
+#workspace $workspace1							    output $monitor_one
 
 
-#TODO
+
 #if you have two monitors:
 #exec arandr
 #aline your screens like you want
@@ -570,19 +618,21 @@ bindsym $mod+End exec --no-startup-id "betterlockscreen -l blur -t ; sudo libinp
 #ALL ALL=NOPASSWD: /usr/bin/libinput-gestures
 
 
+#disable middlclick paste in:
+#gnome-tweaks, just install it
+
 #tap on touchpad to klick
 #1. xinput list		to get id of trackpad
 #2. xinput list-props (device id)		get the property id of the tapping enabled
 #3. exec xinput set-prop (device id) (property id) 1 ( 1 to enable it)
-exec xinput set-prop 11 286 1
-exec xinput set-prop 12 286 1
+exec									    xinput set-prop 11 286 1
+exec 									    xinput set-prop 12 286 1
+exec 									    xinput set-prop 11 293 1
+exec 									    xinput set-prop 12 293 1
+exec 									    xinput set-prop 11 307 1
+exec 									    xinput set-prop 12 307 1
 
-
-#exec_always "setxkbmap -layout us,de"
-
-exec_always --no-startup-id ~/.local/bin/flashfocus
-bindsym $mod+shift+z exec --no-startup-id ~/.local/bin/flash_window
-
-exec_always ~/.program/StandartReset
-#exec sleep 10; xss-lock -- bash ~/.program/lock.sh
-exec_always sleep 5;  bash ~/.program/locklock.sh
+#disable middle click emulation
+exec_always								    xinput --set-button-map 12 1 0 3
+exec_always 								    xinput --set-button-map 11 1 0 3
+#11 and 12 are my touchpad ids
